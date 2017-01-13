@@ -1,0 +1,26 @@
+dist: trusty
+sudo: false
+addons:
+  apt:
+    packages:
+    - libtinfo-dev
+language: c
+script:
+- cd $TRAVIS_BUILD_DIR
+- curl -L https://github.com/erlang/otp/archive/OTP-19.2.tar.gz | tar xz
+- ls -l
+- cd OTP*
+- ./otp_build autoconf
+- ./configure --prefix=$TRAVIS_BUILD_DIR/otp --without-termcap --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time --enable-native-libs
+- make > /dev/null && make install > /dev/null
+- ls -l $TRAVIS_BUILD_DIR/emacs
+- cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
+- ldd $TRAVIS_BUILD_DIR/otp/lib/erlang/erts-8.2/bin/beam.smp
+deploy:
+  provider: releases
+  api_key:
+    secure: 
+  file: emacs.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
