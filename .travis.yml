@@ -8,11 +8,15 @@ language: c
 compiler: clang
 script:
 - cd $TRAVIS_BUILD_DIR
+- curl -L https://github.com/openssl/openssl/archive/OpenSSL_1_1_0c.tar.gz | tar xz
 - curl -L https://github.com/erlang/otp/archive/OTP-19.2.tar.gz | tar xz
 - ls -l
+- cd $TRAVIS_BUILD_DIR/openssl-OpenSSL_1_1_0c
+- ./config --prefix=$TRAVIS_BUILD_DIR/deps no-dso no-shared
+- make > /dev/null && make install > /dev/null
 - cd otp-OTP*
 - ./otp_build autoconf
-- ./otp_build configure --without-termcap --enable-smp-support --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time 
+- ./otp_build configure --with-ssl=$TRAVIS_BUILD_DIR/deps --without-termcap --enable-smp-support --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time 
 - ./otp_build boot -a
 - ./otp_build release -a $TRAVIS_BUILD_DIR/otp
 - ls -l $TRAVIS_BUILD_DIR/otp
