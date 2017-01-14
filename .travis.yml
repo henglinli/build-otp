@@ -19,7 +19,8 @@ script:
 - cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
 deploy:
   provider: releases
-  api_key: f037aabc6ee3b45d06c1d3ff6a4c0e533b4d9dfb
+  api_key:
+    secure: fwdK0bIc2IlosANcoD9esU4ctK0f0BLQmIMj5wjh0usv7e6gV/dOOGrTCK3jUL/8w9KMgTE+njDKBuJOUyTG02mA9bs2NVYDeD/ssHoVcyEb3xhfRB1Mt3u1F+8qr5jAzxUzUalmekAHROIP4jIGUknzlnOIrHRr/Vf1A6rw+JFJsQ3MDB+wWjbye1kqmDpnKO8Yd3jn4feQ9SaILDJXDEkX8ObKgoyfSwO9YPk/ZuTVo4cvzDh3N4xZ5q4V9VlvNvGokb7m8poNZCBBr45H3RamknzQksIcP/BN0mCuRNOsC4O1pmQyHygl5FEx61Xb1WbK44v8FxRatIFk5JJ/zswkkzjcW9MDnUfM6BuCGRLJiF38T5UhA81QPFhS4XrXRLsKL59KL0sq0EBZqjqCd12R2yBpK90/r3sg1vjNYjNxLgbrNdskICPGMW3p0/V20FahV4IgkCUjVW6nADIbbxoLGhHgmhzdkz13I6xhj5Ox5Q2MSh93CwS4cPc96nT639R6tlGRJzOnTFTcR8Yzz6oUTqvAq2JXqUsIOkq/n6AZc5cAoB6+c4qqQ/rUvfCApaQviC1UN70lcDXwW0KApuBCTLwRpQ61QPfgJIh5B8E4gO6QdRG1RY9k3iMxGy0n8r1grU/FyD4gLdSOKgjHuIZtbHQApS0GvixKGiJN46Q=
   file: otp.tar.gz
   skip_cleanup: true
   on:
