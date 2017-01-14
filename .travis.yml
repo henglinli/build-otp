@@ -10,15 +10,16 @@ script:
 - cd $TRAVIS_BUILD_DIR
 - curl -L https://github.com/erlang/otp/archive/OTP-19.2.tar.gz | tar xz
 - git clone https://github.com/google/boringssl
-- mkdir -p boringssl/build
-- cd boringssl/build
+- mkdir -p boringssl/lib
+- cd boringssl/lib
 - cmake -DCMAKE_BUILD_TYPE=Release ..
-- make 
-- make DESTDIR=$TRAVIS_BUILD_DIR/deps install
-- ls -l $TRAVIS_BUILD_DIR/deps/lib $TRAVIS_BUILD_DIR/deps/include
+- make -j4 
+- mv crypto/libcrypto.a .
+- mv ssl/libssl.a .
+- ls -l $TRAVIS_BUILD_DIR/boringssl
 - cd $TRAVIS_BUILD_DIR/otp-OTP*
 - ./otp_build autoconf
-- ./otp_build configure --with-ssl=$TRAVIS_BUILD_DIR/deps --without-termcap --enable-smp-support --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time 
+- ./otp_build configure --with-ssl=$TRAVIS_BUILD_DIR/boringssl --without-termcap --enable-smp-support --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time 
 - ./otp_build boot -a
 - ./otp_build release -a $TRAVIS_BUILD_DIR/otp
 - ls -l $TRAVIS_BUILD_DIR/otp
