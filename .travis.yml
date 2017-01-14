@@ -19,7 +19,7 @@ script:
 - cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
 deploy:
   provider: releases
-  api_key: 3d860e2f2ff36d9dfd59744f50dfe4e838ffaed9
+  api_key: f037aabc6ee3b45d06c1d3ff6a4c0e533b4d9dfb
   file: otp.tar.gz
   skip_cleanup: true
   on:
