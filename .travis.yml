@@ -10,9 +10,9 @@ script:
 - curl -L https://github.com/erlang/otp/archive/OTP-19.2.tar.gz | tar xz
 - ls -l
 - cd otp-OTP*
-- ./otp_build autoconf
-- ./configure --prefix=$TRAVIS_BUILD_DIR/otp --without-termcap --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time --enable-native-libs
-- make && make install 
+- ./otp_build remove_prebuilt_files
+- ./otp_build configure --without-termcap --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time --enable-native-libs
+- ./otp_build ./otp_build release -a $TRAVIS_BUILD_DIR/otp
 - ls -l $TRAVIS_BUILD_DIR/otp
 - cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
 deploy:
