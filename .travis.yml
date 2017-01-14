@@ -12,7 +12,7 @@ script:
 - ls -l
 - cd otp-OTP*
 - ./otp_build autoconf
-- ./otp_buidl update_primary
+- ./otp_build update_primary
 - ./otp_build configure --without-termcap --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time --enable-native-libs
 - ./otp_build release -a $TRAVIS_BUILD_DIR/otp
 - ls -l $TRAVIS_BUILD_DIR/otp
