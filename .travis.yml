@@ -12,10 +12,9 @@ script:
 - cd otp-OTP*
 - ./otp_build autoconf
 - ./configure --prefix=$TRAVIS_BUILD_DIR/otp --without-termcap --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time --enable-native-libs
-- make > /dev/null && make install > /dev/null
-- ls -l $TRAVIS_BUILD_DIR/emacs
+- make && make install 
+- ls -l $TRAVIS_BUILD_DIR/otp
 - cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
-- ldd $TRAVIS_BUILD_DIR/otp/lib/erlang/erts-8.2/bin/beam.smp
 deploy:
   provider: releases
   api_key:
