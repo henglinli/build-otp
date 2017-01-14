@@ -19,7 +19,7 @@ script:
 - cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
 deploy:
   provider: releases
-  api_key:g
+  api_key:
     secure: 
   file: emacs.tar.gz
   skip_cleanup: true
