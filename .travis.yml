@@ -5,19 +5,21 @@ addons:
     packages:
     - libtinfo-dev
 language: c
+compiler: clang
 script:
 - cd $TRAVIS_BUILD_DIR
 - curl -L https://github.com/erlang/otp/archive/OTP-19.2.tar.gz | tar xz
 - ls -l
 - cd otp-OTP*
 - ./otp_build autoconf
+- ./otp_buidl update_primary
 - ./otp_build configure --without-termcap --enable-m64-build --enable-hipe --without-javac --enable-builtin-zlib --disable-saved-compile-time --enable-native-libs
 - ./otp_build release -a $TRAVIS_BUILD_DIR/otp
 - ls -l $TRAVIS_BUILD_DIR/otp
 - cd $TRAVIS_BUILD_DIR && tar cfz otp.tar.gz otp
 deploy:
   provider: releases
-  api_key:
+  api_key:g
     secure: 
   file: emacs.tar.gz
   skip_cleanup: true
