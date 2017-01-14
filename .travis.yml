@@ -11,7 +11,7 @@ script:
 - curl -L https://github.com/erlang/otp/archive/OTP-19.2.tar.gz | tar xz
 - ls -l
 - cd otp-OTP*
-- rm -rf bootstrap/*
+- rm -rf bootstrap/bin/* bootstrap/lib/*
 - ./otp_build autoconf
 - ./otp_build configure --enable-bootstrap-only
 - ./otp_build boot
