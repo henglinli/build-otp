@@ -13,7 +13,7 @@ script:
 - mkdir -p boringssl/lib
 - cd boringssl/lib
 - cmake -DCMAKE_BUILD_TYPE=Release ..
-- make -j4 
+- make -j2 
 - mv crypto/libcrypto.a .
 - mv ssl/libssl.a .
 - ls -l $TRAVIS_BUILD_DIR/boringssl
