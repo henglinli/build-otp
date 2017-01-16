@@ -12,7 +12,7 @@ script:
 - git clone https://github.com/libressl-portable/portable
 - cd portable
 - ./autogen.sh
-- ./configure --disable-shared
+- ./configure --disable-shared CFLAGS="-fPIC"
 - make prefix=$TRAVIS_BUILD_DIR/ssl install
 - cd $TRAVIS_BUILD_DIR/otp-OTP*
 - ./otp_build autoconf
