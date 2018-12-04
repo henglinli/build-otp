@@ -5,14 +5,13 @@ compiler: clang
 script:
 - cd $TRAVIS_BUILD_DIR
 - curl -L https://github.com/erlang/otp/archive/OTP-21.1.4.tar.gz| tar xz
-- git clone https://github.com/libressl-portable/portable
-- cd portable
-- ./autogen.sh
-- ./configure --disable-shared CFLAGS="-fPIC"
+- curl -L https://github.com/openssl/openssl/archive/OpenSSL_1_1_1a.tar.gz | tar xz
+- cd $TRAVIS_BUILD_DIR/openssl-OpenSSL*
+- ./config no-deprecated no-comp no-shared no-tests no-threads no-ui
 - make prefix=$TRAVIS_BUILD_DIR/ssl install
 - cd $TRAVIS_BUILD_DIR/otp-OTP*
 - ./otp_build autoconf
-- ./otp_build configure --with-ssl=$TRAVIS_BUILD_DIR/ssl --without-termcap --enable-m64-build --without-javac --enable-builtin-zlib --disable-saved-compile-time 
+- ./otp_build configure --with-ssl=$TRAVIS_BUILD_DIR/ssl --without-termcap --enable-m64-build --without-javac --enable-builtin-zlib --enable-native-libs --disable-saved-compile-time 
 - ./otp_build boot -a
 - ./otp_build release -a $TRAVIS_BUILD_DIR/otp
 - ls -l $TRAVIS_BUILD_DIR/otp
