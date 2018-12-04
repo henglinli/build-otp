@@ -1,13 +1,13 @@
 dist: xenial
 sudo: false
 language: c
-compiler: gcc
+compiler: clang
 script:
 - cd $TRAVIS_BUILD_DIR
 - curl -L https://github.com/erlang/otp/archive/OTP-21.1.4.tar.gz| tar xz
 - curl -L https://github.com/openssl/openssl/archive/OpenSSL_1_1_1a.tar.gz | tar xz
 - cd $TRAVIS_BUILD_DIR/openssl-OpenSSL*
-- ./config --prefix=$TRAVIS_BUILD_DIR/ssl no-deprecated no-comp no-shared no-tests no-threads no-ui
+- ./config --prefix=$TRAVIS_BUILD_DIR/ssl no-comp no-shared no-tests no-threads no-ui
 - make prefix=$TRAVIS_BUILD_DIR/ssl install
 - ls -l $TRAVIS_BUILD_DIR
 - cd $TRAVIS_BUILD_DIR/otp-OTP*
